@@ -3,647 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FuelMaster | Enterprise Fuel Station Management</title>
+    <title>FuelMaster Ultra | Spatial Enterprise OS</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
+    <!-- Ultra-Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
 
-    <style>
-        :root {
-            --primary: #0b1120;       
-            --accent: #2563eb;        
-            --accent-glow: #3b82f6;   
-            --secondary: #64748b;     
-            --bg: #f8fafc;            
-            --white: #ffffff;
-            --success: #10b981;
-            --danger: #ef4444;
-            --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-            --shadow-glow: 0 0 40px -10px rgba(59, 130, 246, 0.5);
-        }
-
-        /* --- ANTI-COPY PROTECTION --- */
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--bg); 
-            color: var(--primary); 
-            overflow-x: hidden;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            position: relative;
-            
-            /* Disable Text Selection */
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            -webkit-touch-callout: none;
-        }
-
-        /* Re-enable selection ONLY for inputs and textareas */
-        input, textarea, select {
-            -webkit-user-select: auto !important;
-            -moz-user-select: auto !important;
-            -ms-user-select: auto !important;
-            user-select: auto !important;
-        }
-
-        /* Prevent image saving */
-        img { -webkit-user-drag: none; pointer-events: none; }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        h1, h2, h3, h4, .btn { font-family: 'Outfit', sans-serif; }
-
-        /* --- PREMIUM BACKGROUNDS --- */
-        .bg-grid {
-            position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2;
-            background-size: 50px 50px;
-            background-image: 
-                linear-gradient(to right, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
-            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-        }
-        
-        .bg-blob { position: absolute; border-radius: 50%; filter: blur(100px); z-index: -1; animation: pulse 10s infinite alternate; opacity: 0.5; pointer-events: none; }
-        .blob-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: rgba(59, 130, 246, 0.25); }
-        .blob-2 { top: 30%; right: -10%; width: 600px; height: 600px; background: rgba(16, 185, 129, 0.15); animation-delay: -5s; }
-
-        @keyframes pulse { 0% { transform: scale(1) translate(0, 0); } 100% { transform: scale(1.2) translate(50px, 50px); } }
-
-        /* --- NAVBAR --- */
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(255,255,255,0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.8);
-        }
-        .nav-content { max-width: 1280px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.6rem; font-weight: 900; color: var(--primary); display: flex; align-items: center; gap: 10px; letter-spacing: -0.5px; }
-        .logo i { background: linear-gradient(135deg, var(--accent), #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .nav-links { display: flex; gap: 15px; align-items: center; }
-        
-        /* --- BUTTONS & FX --- */
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 14px 28px; border-radius: 50px; font-weight: 700; font-size: 1rem; letter-spacing: 0.5px;
-            cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            text-decoration: none; border: none; position: relative; overflow: hidden;
-        }
-        
-        /* Button Shine Effect */
-        .btn::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: skewX(-20deg); animation: shine 4s infinite;
-        }
-        @keyframes shine { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
-
-        .btn-primary { background: var(--primary); color: var(--white); box-shadow: 0 10px 20px rgba(11,17,32,0.15); }
-        .btn-primary:hover { transform: translateY(-4px); box-shadow: 0 15px 25px rgba(11,17,32,0.25); }
-        
-        .btn-accent { background: linear-gradient(135deg, var(--accent), #4f46e5); color: var(--white); box-shadow: var(--shadow-glow); border: 1px solid rgba(255,255,255,0.2); }
-        .btn-accent:hover { transform: translateY(-4px); box-shadow: 0 0 50px -5px rgba(59, 130, 246, 0.6); }
-
-        .btn-outline { border: 2px solid rgba(11,17,32,0.1); color: var(--primary); background: rgba(255,255,255,0.5); backdrop-filter: blur(5px); }
-        .btn-outline:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateY(-4px); }
-
-        .btn-nav { background: transparent; color: var(--secondary); font-weight: 600; padding: 10px 20px; }
-        .btn-nav:hover { color: var(--accent); background: rgba(59,130,246,0.08); }
-        .btn-nav::before { display: none; }
-
-        /* --- HERO SECTION --- */
-        .hero { padding: 160px 2rem 80px; max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center; }
-        
-        .hero-text h1 {
-            font-size: 5rem; line-height: 1.05; margin-bottom: 1.5rem; letter-spacing: -1.5px;
-            background: linear-gradient(270deg, var(--primary), #1e3a8a, #4f46e5, var(--primary));
-            background-size: 300% 300%; animation: gradientShift 8s ease infinite;
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-        
-        .hero-text p { font-size: 1.25rem; color: var(--secondary); margin-bottom: 2.5rem; max-width: 500px; font-weight: 500; }
-        .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
-        
-        /* MODERN PHONE MOCKUP */
-        .hero-visual { position: relative; perspective: 1200px; display: flex; justify-content: center; }
-        .app-mockup {
-            width: 100%; max-width: 310px; aspect-ratio: 9/19.5; /* Perfect modern phone ratio */
-            background: #000; border-radius: 48px; border: 10px solid #0f172a;
-            box-shadow: 0 40px 80px rgba(15, 23, 42, 0.4), inset 0 0 0 2px #334155;
-            overflow: hidden; position: relative; z-index: 10;
-            animation: floatPhone 6s ease-in-out infinite;
-            transform-style: preserve-3d;
-        }
-        
-        /* Floating Glow behind phone */
-        .hero-visual::before {
-            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 250px; height: 500px; background: var(--accent); filter: blur(100px); opacity: 0.4; z-index: 1;
-        }
-
-        @keyframes floatPhone {
-            0% { transform: translateY(0px) rotateY(-8deg) rotateX(4deg); }
-            50% { transform: translateY(-20px) rotateY(-4deg) rotateX(2deg); }
-            100% { transform: translateY(0px) rotateY(-8deg) rotateX(4deg); }
-        }
-        
-        /* Modern Dynamic Island */
-        .app-mockup::after {
-            content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
-            width: 90px; height: 26px; background: #000; border-radius: 20px; z-index: 10;
-        }
-
-        /* PERFECT IMAGE ALIGNMENT FIX */
-        .slideshow-container { 
-            position: absolute; top: 0; left: 0; 
-            width: 100%; height: 100%; background: #0f172a; 
-        }
-        .slide { 
-            position: absolute; top: 0; left: 0; display: block;
-            width: 100%; height: 100%; opacity: 0; 
-            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1); 
-            object-fit: cover; object-position: center; 
-        }
-        .slide.active { opacity: 1; }
-
-        /* --- FEATURES (GLASSMORPHISM) --- */
-        .section { padding: 100px 2rem; max-width: 1280px; margin: 0 auto; position: relative; z-index: 2; }
-        .section-header { text-align: center; margin-bottom: 60px; max-width: 700px; margin-left: auto; margin-right: auto; }
-        .section-header h2 { font-size: 3rem; margin-bottom: 1rem; color: var(--primary); letter-spacing: -1px; }
-        .section-header p { color: var(--secondary); font-size: 1.15rem; }
-
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
-        .feature-card {
-            background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            padding: 3rem 2.5rem; border-radius: 30px; box-shadow: var(--shadow-glass); 
-            border: 1px solid rgba(255,255,255,0.8); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative; overflow: hidden;
-        }
-        .feature-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(90deg, var(--accent), #10b981); opacity: 0; transition: 0.3s;
-        }
-        .feature-card:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-        .feature-card:hover::before { opacity: 1; }
-        
-        .icon-wrapper {
-            width: 65px; height: 65px; border-radius: 20px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.8rem; margin-bottom: 1.8rem; transition: transform 0.4s ease; box-shadow: 0 8px 16px rgba(0,0,0,0.05);
-        }
-        .feature-card:hover .icon-wrapper { transform: scale(1.1) rotate(8deg); }
-
-        /* --- MODALS --- */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            z-index: 2000; display: none; justify-content: center; align-items: center;
-            opacity: 0; transition: opacity 0.3s; padding: 1rem;
-        }
-        .modal-overlay.open { opacity: 1; }
-        
-        .modal-card {
-            background: rgba(255, 255, 255, 0.95); width: 100%; max-width: 520px;
-            border-radius: 32px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.5);
-            display: flex; flex-direction: column; max-height: 90vh; 
-            animation: modalPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); overflow: hidden;
-        }
-
-        @keyframes modalPop { 0% { transform: scale(0.95) translateY(20px); opacity: 0; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
-
-        .modal-header { padding: 25px 30px; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; background: rgba(248, 250, 252, 0.8); }
-        .modal-header h3 { font-size: 1.3rem; color: var(--primary); display: flex; align-items: center; gap: 12px; margin: 0; font-weight: 800;}
-        .close-btn { background: #f1f5f9; border: none; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; color: var(--secondary); transition: 0.2s; pointer-events: auto; }
-        .close-btn:hover { background: #fee2e2; color: var(--danger); transform: rotate(90deg); }
-
-        .modal-body { padding: 30px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-
-        .input-group { margin-bottom: 18px; }
-        .input-group label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; }
-        .input-field {
-            width: 100%; padding: 14px 16px; border-radius: 12px; border: 2px solid #e2e8f0;
-            font-size: 16px; font-family: 'Inter', sans-serif; transition: all 0.2s; background: rgba(255,255,255,0.8); font-weight: 500;
-        }
-        .input-field:focus { outline: none; border-color: var(--accent); background: white; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
-
-        .tank-row { display: grid; grid-template-columns: 2fr 1.5fr 45px; gap: 10px; align-items: center; margin-bottom: 12px; }
-        .btn-mini { height: 45px; width: 45px; border-radius: 12px; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; background:#fee2e2; color:#ef4444; font-size: 1.2rem; }
-        .btn-mini:hover { filter: brightness(0.95); transform: scale(1.05); }
-        .btn-add-tank { width: 100%; padding: 14px; border: 2px dashed #cbd5e1; color: var(--primary); background: rgba(248,250,252,0.5); border-radius: 12px; margin-top: 5px; cursor: pointer; font-size: 0.95rem; font-weight: 700; transition: 0.2s; }
-        .btn-add-tank:hover { border-color: var(--accent); color: var(--accent); background: rgba(37,99,235,0.05); }
-
-        .toggle-label { display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: 1rem; font-weight: 600; color: var(--primary); margin-bottom: 8px; padding: 12px; border-radius: 12px; transition: 0.2s; border: 1px solid transparent; }
-        .toggle-label:hover { background: #f8fafc; border-color: #e2e8f0; }
-        .toggle-label input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); cursor: pointer; }
-        .hidden-section { display: none; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; margin-bottom: 20px; animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-        
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- VERIFICATION ENGINE --- */
-        .loader-content { text-align: center; padding: 40px 20px; }
-        .spinner-ring { 
-            width: 70px; height: 70px; border: 4px solid #f1f5f9; border-top: 4px solid var(--accent); 
-            border-radius: 50%; animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; margin: 0 auto 25px;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        .progress-bar-bg { width: 100%; height: 6px; background: #e2e8f0; border-radius: 10px; margin-top: 25px; overflow: hidden;}
-        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #10b981); width: 0%; transition: width 0.4s ease; }
-        .step-text { font-weight: 600; color: var(--secondary); margin-top: 15px; font-size: 1.05rem; }
-
-        .ticket-box { 
-            background: #f0fdf4; border: 2px dashed #16a34a; padding: 18px; margin: 25px 0; border-radius: 16px; 
-            color: #15803d; font-weight: 900; font-size: 2rem; font-family: 'Outfit'; letter-spacing: 2px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        /* --- FOOTER --- */
-        footer { background: var(--primary); color: #94a3b8; padding: 5rem 2rem; margin-top: 4rem; position: relative; z-index: 2;}
-        .footer-content { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; align-items: center; }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 950px) {
-            .hero { grid-template-columns: 1fr; text-align: center; padding: 140px 1.5rem 60px; }
-            .hero-text h1 { font-size: 4rem; }
-            .hero-text p { margin: 0 auto 2rem; }
-            .hero-buttons { justify-content: center; }
-            .app-mockup { margin: 0 auto; animation: floatPhoneMobile 5s ease-in-out infinite; }
-            .hero-visual::before { width: 200px; height: 400px; }
-            @keyframes floatPhoneMobile { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
-        }
-
-        @media (max-width: 500px) {
-            .nav-content { padding: 1rem; }
-            .logo { font-size: 1.4rem; }
-            .btn-nav span { display: none; } 
-            .btn-nav { padding: 10px; border-radius: 50%; } 
-            .btn-accent { padding: 12px 20px; font-size: 0.95rem; }
-            
-            .hero-text h1 { font-size: 3rem; letter-spacing: -1px; }
-            .hero-buttons { flex-direction: column; width: 100%; }
-            .hero-buttons .btn { width: 100%; }
-            
-            .app-mockup { max-width: 270px; } 
-            
-            .section { padding: 60px 1rem; }
-            .section-header h2 { font-size: 2.2rem; }
-            .feature-card { padding: 2.5rem 1.5rem; }
-            
-            .modal-card { width: 100%; max-width: 100%; border-radius: 28px 28px 0 0; margin-top: auto; max-height: 85vh; border: none; }
-            .modal-overlay { align-items: flex-end; padding: 0; }
-            .footer-content { flex-direction: column; text-align: center; }
-        }
-    </style>
+    <!-- Core Libraries -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
-    <div class="bg-grid"></div>
-    <div class="bg-blob blob-1"></div>
-    <div class="bg-blob blob-2"></div>
+    <!-- Cinematic Preloader -->
+    <div class="preloader">
+        <div class="loader-content">
+            <div class="brand-text">FUELMASTER</div>
+            <div class="loading-bar"><div class="loading-progress"></div></div>
+            <div class="loading-percentage">0%</div>
+        </div>
+    </div>
 
-    <nav>
-        <div class="nav-content">
-            <div class="logo"><i class="fas fa-gas-pump"></i> FUELMASTER</div>
-            <div class="nav-links">
-                <button class="btn btn-nav" onclick="openModal('updateModal')" title="Update Station">
-                    <i class="fas fa-sync-alt"></i> <span>Update Profile</span>
-                </button>
-                <button class="btn btn-accent" onclick="openModal('downloadModal')">
-                    <i class="fas fa-download"></i> <span>Download App</span>
-                </button>
+    <!-- Custom Magnetic Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Ambient Background Effects -->
+    <div class="noise-bg"></div>
+    <div class="ambient-light orb-1"></div>
+    <div class="ambient-light orb-2"></div>
+    <div class="ambient-light orb-3"></div>
+
+    <!-- Glass Navbar -->
+    <nav class="ultra-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-gas-pump"></i></div>
+                <span class="logo-text">FUELMASTER<span class="pro-badge">ULTRA</span></span>
             </div>
+            <div class="nav-links pc-only">
+                <a href="#features" class="hover-link">Features</a>
+                <a href="#dashboard" class="hover-link">Updates</a>
+            </div>
+            <button class="btn btn-secondary btn-magnetic" onclick="openPanel('checkoutPanel')">
+                <span class="btn-text">Initialize App <i class="fas fa-arrow-right"></i></span>
+            </button>
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="hero-text" data-aos="fade-up" data-aos-duration="1000">
-            <h1>Automate Your <br>Fuel Station</h1>
-            <p>The enterprise-grade solution for IOCL, BPCL, HPCL, and JioBP dealers. Precision density calculations, stock reconciliation, and variance audits.</p>
-            <div class="hero-buttons">
-                <button class="btn btn-accent" onclick="openModal('downloadModal')"><i class="fab fa-android"></i> Download App</button>
-                <button class="btn btn-outline" onclick="openModal('updateModal')"><i class="fas fa-shield-alt"></i> Secure Update</button>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="status-pill reveal-up">
+                    <span class="pulse-dot"></span> App Version: v3.0 Stable
+                </div>
+                <h1 class="hero-title reveal-up">
+                    End Manual Math. <br>
+                    <span class="gradient-text liquid-effect">Total Pump Control.</span>
+                </h1>
+                <p class="hero-desc reveal-up">
+                    Calculate standard density, audit tanker variance, and map dip volumes instantly without opening a single manual calibration chart.
+                </p>
+                <div class="hero-actions reveal-up">
+                    <button class="btn btn-primary btn-glow btn-magnetic" onclick="openPanel('checkoutPanel')">
+                        <span class="btn-text">Download App — ₹999</span>
+                    </button>
+                    <button class="btn btn-outline btn-magnetic" onclick="openPanel('updatePanel')">
+                        <span class="btn-text">Secure Update Request</span>
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <div class="hero-visual" data-aos="zoom-in-up" data-aos-duration="1200" data-aos-delay="200">
-            <div class="app-mockup">
-                <div class="slideshow-container" id="phoneSlideshow">
+            <!-- 3D Hero Visual -->
+            <div class="hero-3d-wrapper reveal-scale">
+                <div class="dashboard-mockup tilt-card">
+                    <div class="mockup-header">
+                        <div class="mac-dots"><span></span><span></span><span></span></div>
+                        <div class="mockup-url">fuelmaster.app/tanker-audit</div>
                     </div>
+                    <div class="mockup-body">
+                        <div class="mockup-sidebar"></div>
+                        <div class="mockup-main">
+                            <div class="mockup-chart" style="display:flex; flex-direction:column; justify-content:center; padding: 20px;">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-family:monospace;"><span>Hydrometer:</span> <strong>742.5</strong></div>
+                                <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-family:monospace;"><span>Temperature:</span> <strong>31.5°C</strong></div>
+                                <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-family:monospace;"><span>Challan Dens:</span> <strong>746.0</strong></div>
+                                <div style="border-top:1px dashed rgba(255,255,255,0.2); margin-bottom:20px;"></div>
+                                <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); padding:15px; border-radius:10px; text-align:center; color:#10b981; font-weight:bold; letter-spacing:2px;">ACCEPTABLE <i class="fas fa-check-circle"></i></div>
+                            </div>
+                            <div class="mockup-stats">
+                                <div class="m-stat line-load"></div>
+                                <div class="m-stat line-load delay-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="section">
-        <div class="section-header" data-aos="fade-up">
-            <h2>Enterprise Features</h2>
-            <p>Everything you need to run your pump efficiently.</p>
-        </div>
-        <div class="feature-grid">
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="icon-wrapper" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;"><i class="fas fa-file-invoice-dollar"></i></div>
-                <h3>Invoice Audit</h3>
-                <p>Detect shortages instantly. Compares challan density vs observed density with critical "Do Not Unload" alerts.</p>
-            </div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="icon-wrapper" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;"><i class="fas fa-temperature-high"></i></div>
-                <h3>Density Converter</h3>
-                <p>Digital ASTM 53B tables. Convert observed temperature and density to standard 15°C values automatically.</p>
-            </div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="icon-wrapper" style="background: rgba(16, 185, 129, 0.1); color: #10b981;"><i class="fas fa-chart-area"></i></div>
-                <h3>Stocks & Dips</h3>
-                <p>Reconcile stocks with digital dip charts. Enter dip reading (cm) to get exact volume in liters.</p>
+        <!-- Marquee Partners -->
+        <div class="marquee-section">
+            <p class="marquee-title">ENGINEERED FOR DEALERS ACROSS INDIA</p>
+            <div class="marquee">
+                <div class="marquee-content">
+                    <span><i class="fas fa-droplet"></i> INDIAN OIL</span>
+                    <span><i class="fas fa-fire-flame-simple"></i> BHARAT PETROLEUM</span>
+                    <span><i class="fas fa-gas-pump"></i> HINDUSTAN PETROLEUM</span>
+                    <span><i class="fas fa-bolt"></i> JIO BP</span>
+                    <span><i class="fas fa-shield-halved"></i> NAYARA ENERGY</span>
+                    <!-- Duplicate for infinite scroll -->
+                    <span><i class="fas fa-droplet"></i> INDIAN OIL</span>
+                    <span><i class="fas fa-fire-flame-simple"></i> BHARAT PETROLEUM</span>
+                    <span><i class="fas fa-gas-pump"></i> HINDUSTAN PETROLEUM</span>
+                    <span><i class="fas fa-bolt"></i> JIO BP</span>
+                    <span><i class="fas fa-shield-halved"></i> NAYARA ENERGY</span>
+                </div>
             </div>
         </div>
-    </section>
 
-    <div class="modal-overlay" id="downloadModal">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3><i class="fab fa-android" style="color:var(--accent)"></i> Get FuelMaster</h3>
-                <button class="close-btn" onclick="closeModal('downloadModal')"><i class="fas fa-times"></i></button>
+        <!-- Bento Grid Features -->
+        <section class="bento-section" id="features">
+            <div class="bento-header reveal-up">
+                <h2>Designed for the Forecourt.</h2>
+                <p>Everything your managers need, engineered into one seamless application.</p>
             </div>
-            <div class="modal-body">
-                <div style="display:flex; background:#f1f5f9; padding:6px; border-radius:14px; margin-bottom:25px;">
-                    <button class="btn" style="flex:1; background:white; color:var(--primary); box-shadow:0 4px 6px rgba(0,0,0,0.05);" id="tabReg" onclick="switchDlTab('register')">Register</button>
-                    <button class="btn" style="flex:1; background:transparent; color:var(--secondary); box-shadow:none;" id="tabLog" onclick="switchDlTab('login')">Login</button>
+            
+            <div class="bento-grid">
+                
+                <!-- Feature 1: Auto Density -->
+                <div class="bento-item span-2 tilt-card">
+                    <div class="bento-inner">
+                        <div class="icon-ring"><i class="fas fa-temperature-half"></i></div>
+                        <h3>Instant Density Engine</h3>
+                        <p>Throw away the ASTM 53B manual books. Input your hydrometer reading and temperature, and the engine instantly outputs the exact standard density at 15°C.</p>
+                        
+                        <div class="mini-calc" style="max-width: 350px; margin-top: 20px;">
+                            <div>Obs: 742.5 @ 31°C</div> <i class="fas fa-arrow-right text-dim"></i> <div class="highlight">Std: 746.2 @ 15°C</div>
+                        </div>
+                    </div>
                 </div>
 
-                <form id="form-register" onsubmit="handleRegister(event)">
-                    <div class="input-group"><label>Station Name</label><input type="text" id="r_pump" class="input-field" placeholder="e.g. Jai Hind Fuels" required></div>
-                    <div class="input-group"><label>Full Address</label><textarea id="r_address" class="input-field" rows="2" placeholder="Full address of the station" required></textarea></div>
-
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-                        <div class="input-group"><label>Brand</label><select id="r_brand" class="input-field" required><option value="">Select...</option><option value="IOCL">IOCL</option><option value="HPCL">HPCL</option><option value="BPCL">BPCL</option><option value="JioBP">JioBP</option><option value="Nayara">Nayara</option></select></div>
-                        <div class="input-group"><label>Mobile</label><input type="tel" id="r_mobile" class="input-field" pattern="[0-9]{10}" placeholder="10 Digits" required></div>
+                <!-- Feature 2: Dip Volume -->
+                <div class="bento-item tilt-card">
+                    <div class="bento-inner">
+                        <div class="tank-visual">
+                            <div class="liquid" id="liveLiquid"></div>
+                            <div class="tank-data">
+                                <h4 id="klCounter">14.5 KL</h4>
+                            </div>
+                        </div>
+                        <h3>Dip to Volume</h3>
+                        <p>Enter the dip reading in cm, instantly get exact liters.</p>
                     </div>
+                </div>
 
-                    <div class="input-group"><label>Manager Name</label><input type="text" id="r_manager" class="input-field" required></div>
-                    <div class="input-group"><label>Create Password</label><input type="password" id="r_pass" class="input-field" required></div>
-
-                    <div class="input-group"><label>Tank Configuration</label><div id="r_tanks"></div><button type="button" class="btn-add-tank" onclick="addTank('r_tanks')"><i class="fas fa-plus"></i> Add Storage Tank</button></div>
-
-                    <button type="submit" class="btn btn-accent" style="width:100%; margin-top:15px; font-size:1.1rem; padding:16px;">Register & Proceed</button>
-                </form>
-
-                <form id="form-login" style="display:none;" onsubmit="handleLogin(event)">
-                    <div class="input-group"><label>User ID / Mobile</label><input type="text" class="input-field" required></div>
-                    <div class="input-group"><label>Password</label><input type="password" class="input-field" required></div>
-                    <button type="submit" class="btn btn-accent" style="width:100%; margin-top:15px; font-size:1.1rem; padding:16px;">Secure Login</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="updateModal">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3><i class="fas fa-shield-alt" style="color:var(--accent)"></i> Secure Update</h3>
-                <button class="close-btn" onclick="closeModal('updateModal')"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="modal-body">
-                <form onsubmit="handleUpdate(event)">
-                    <div style="background:#f0f9ff; padding:20px; border-radius:16px; border:1px solid #bae6fd; margin-bottom:25px;">
-                        <label style="color:#0369a1; font-size:0.85rem; font-weight:800; letter-spacing:1px;"><i class="fas fa-lock"></i> VERIFICATION REQUIRED</label>
-                        <input type="text" id="u_pump" class="input-field" placeholder="Current Station Name" style="margin-top:12px; background:white;" required>
-                        <input type="tel" id="u_mobile_auth" class="input-field" placeholder="Registered Mobile" style="margin-top:12px; background:white;" required>
+                <!-- Feature 3: Tanker Variance -->
+                <div class="bento-item tilt-card">
+                    <div class="bento-inner">
+                        <div class="icon-ring" style="background: rgba(16, 185, 129, 0.1); color: var(--success); border-color: rgba(16, 185, 129, 0.3);"><i class="fas fa-scale-balanced"></i></div>
+                        <h3>Tanker Variance</h3>
+                        <p>Input observed data vs invoice density. App flags ACCEPTABLE or REJECT instantly.</p>
                     </div>
+                </div>
 
-                    <p style="font-size:1rem; font-weight:700; margin-bottom:15px; color:var(--primary);">Select fields to modify:</p>
+                <!-- Feature 4: Sub-users & Themes -->
+                <div class="bento-item tilt-card">
+                    <div class="bento-inner">
+                        <div class="icon-ring purple"><i class="fas fa-users-gear"></i></div>
+                        <h3>Staff & Themes</h3>
+                        <p>Multiple sub-user profiles for managers. High-contrast themes for Day & Night shifts.</p>
+                    </div>
+                </div>
 
-                    <div><label class="toggle-label"><input type="checkbox" id="chk_addr" onchange="toggleSection('sec_addr', this.checked)"> Update Address</label><div id="sec_addr" class="hidden-section"><textarea id="u_address" class="input-field" rows="2" placeholder="Enter New Address"></textarea></div></div>
-                    <div><label class="toggle-label"><input type="checkbox" id="chk_man" onchange="toggleSection('sec_man', this.checked)"> Update Manager</label><div id="sec_man" class="hidden-section"><input type="text" id="u_manager" class="input-field" placeholder="New Manager Name"></div></div>
-                    <div><label class="toggle-label"><input type="checkbox" id="chk_mob" onchange="toggleSection('sec_mob', this.checked)"> Update Mobile</label><div id="sec_mob" class="hidden-section"><input type="tel" id="u_mobile_new" class="input-field" placeholder="New Mobile Number"></div></div>
-                    <div><label class="toggle-label"><input type="checkbox" id="chk_pass" onchange="toggleSection('sec_pass', this.checked)"> Reset Password</label><div id="sec_pass" class="hidden-section"><input type="password" id="u_pass" class="input-field" placeholder="New Password"></div></div>
-                    <div><label class="toggle-label"><input type="checkbox" id="chk_tanks" onchange="toggleSection('sec_tanks', this.checked)"> Update Tank Config</label><div id="sec_tanks" class="hidden-section"><p style="font-size:0.9rem; color:var(--secondary); margin-bottom:12px; font-weight:600;">Define NEW storage configuration:</p><div id="u_tanks"></div><button type="button" class="btn-add-tank" onclick="addTank('u_tanks')"><i class="fas fa-plus"></i> Add Tank</button></div></div>
-
-                    <button type="submit" class="btn btn-primary" style="width:100%; margin-top:25px; padding:16px; font-size:1.1rem;">
-                        Submit Request <i class="fas fa-arrow-right" style="margin-left:5px;"></i>
-                    </button>
-                </form>
+                <!-- Feature 5: Compliance Tracker -->
+                <div class="bento-item span-2 tilt-card">
+                    <div class="bento-inner layout-row">
+                        <div class="text-part">
+                            <span style="display:inline-block; font-size:0.7rem; font-family:monospace; background:rgba(239,68,68,0.1); color:#ef4444; padding:4px 8px; border-radius:4px; margin-bottom:10px; border:1px solid rgba(239,68,68,0.3);">IN DEVELOPMENT</span>
+                            <h3>Compliance Tracker</h3>
+                            <p>An upcoming module to track statutory requirements, stamping dates, and automated reporting. Stay ahead of inspections.</p>
+                        </div>
+                        <div class="receipt-anim">
+                            <div class="receipt-paper">
+                                <div class="line"></div><div class="line w-70"></div><div class="line w-50"></div>
+                                <div class="stamp">VERIFIED</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
+    </main>
+
+    <!-- Right Side Slide-Over Panel (Registration/Checkout) -->
+    <div class="side-panel-overlay" id="checkoutPanelOverlay" onclick="closePanel('checkoutPanel')"></div>
+    <div class="side-panel" id="checkoutPanel">
+        <div class="panel-header">
+            <h3><i class="fas fa-download text-accent"></i> Download App</h3>
+            <button class="close-panel" onclick="closePanel('checkoutPanel')"><i class="fas fa-times"></i></button>
         </div>
-    </div>
-
-    <div class="modal-overlay" id="loadingModal">
-        <div class="modal-card" style="max-width: 360px; margin: auto; text-align:center;">
-            <div class="loader-content">
-                <div class="spinner-ring"></div>
-                <h3 style="font-size: 1.5rem; font-weight:800;">Processing</h3>
-                <p class="step-text" id="loadingText">Connecting to secure server...</p>
-                <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+        <div class="panel-body">
+            <div class="price-tag">
+                <span class="currency">₹</span><span class="amount">999</span><span class="duration">/lifetime</span>
             </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="successModal">
-        <div class="modal-card" style="max-width: 420px; margin: auto;">
-            <div class="success-content">
-                <i class="fas fa-check-circle" style="font-size: 4.5rem; color: var(--success); margin-bottom: 20px;"></i>
-                <h2 id="successTitle" style="font-size: 2rem; margin-bottom: 8px; font-weight:900;">Verified!</h2>
-                <p id="successSub" style="color: var(--secondary); font-size:1.1rem;">Your request has been securely logged.</p>
-                
-                <div class="ticket-box" id="ticketDisplay">#TIC-0000</div>
-                
-                <p style="font-size: 0.95rem; color: var(--secondary); background: rgba(241, 245, 249, 0.8); padding: 15px; border-radius: 12px; font-weight:500;">Please save this secure ticket number for future support references.</p>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 30px; padding:16px; font-size:1.1rem;" onclick="finishFlow()">Done</button>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <div class="footer-content">
-            <div>
-                <div class="logo" style="color: white; margin-bottom: 15px;"><i class="fas fa-gas-pump"></i> FUELMASTER</div>
-                <p>&copy; 2026 Velocity6097. Enterprise Solutions.</p>
-            </div>
-            <div>
-                <button class="btn btn-outline" style="border-color:rgba(255,255,255,0.2); color:white; background:transparent;" onclick="openModal('updateModal')">
-                    <i class="fas fa-shield-alt"></i> Secure Profile Update
-                </button>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // --- ANTI-COPY SECURITY SCRIPTS ---
-        document.addEventListener('contextmenu', e => {
-            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') { e.preventDefault(); }
-        });
-
-        document.addEventListener('keydown', e => {
-            if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'v' || e.key === 'a' || e.key === 'u' || e.key === 's')) {
-                if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') { e.preventDefault(); }
-            }
-            if (e.key === 'F12') { e.preventDefault(); }
-        });
-
-        // Initialize Animate On Scroll
-        AOS.init({ once: true, offset: 50, duration: 800, easing: 'ease-out-cubic' });
-
-        const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1472252413195849922/oyxGWQ2D1t0Bj-H8ZR8c4pFr99fxQlPerNEtj694ohjIi6H8hKIo8u4UX21CZQt-Sykg'; 
-        const APK_LINK = 'https://github.com/VELOCITY6097/Fuel-Master-app/releases/download/V1.5/FuelMaster.apk';
-        let currentFlow = ''; 
-
-        // --- PREMIUM PHONE SLIDESHOW ---
-        let slideIndex = 0;
-        const slides = [
-            'images/screen1.jpg',
-            'images/screen2.jpg',
-            'images/screen3.jpg',
-            'images/screen4.jpg',
-            'images/screen5.jpg',
-            'images/screen6.jpg',
-            'images/screen7.jpg'
-        ];
-        
-        const phoneContainer = document.getElementById('phoneSlideshow');
-        phoneContainer.innerHTML = slides.map((src, i) => 
-            `<img src="${src}" class="slide ${i === 0 ? 'active' : ''}">`
-        ).join('');
-        
-        setInterval(() => {
-            const els = document.querySelectorAll('.slide');
-            els[slideIndex].classList.remove('active');
-            slideIndex = (slideIndex + 1) % els.length;
-            els[slideIndex].classList.add('active');
-        }, 4000); 
-
-        // --- MODAL LOGIC ---
-        function openModal(id) {
-            const el = document.getElementById(id); el.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; 
-            setTimeout(() => el.classList.add('open'), 10);
-            if(id === 'downloadModal' && document.getElementById('r_tanks').children.length === 0) addTank('r_tanks');
-        }
-        function closeModal(id) {
-            const el = document.getElementById(id); el.classList.remove('open');
-            document.body.style.overflow = ''; 
-            setTimeout(() => el.style.display = 'none', 300);
-        }
-        function switchDlTab(tab) {
-            document.getElementById('form-register').style.display = tab === 'register' ? 'block' : 'none';
-            document.getElementById('form-login').style.display = tab === 'login' ? 'block' : 'none';
-            const btnReg = document.getElementById('tabReg'), btnLog = document.getElementById('tabLog');
-            if(tab === 'register') {
-                btnReg.style.background = 'white'; btnReg.style.boxShadow = '0 4px 6px rgba(0,0,0,0.05)'; btnReg.style.color = 'var(--primary)';
-                btnLog.style.background = 'transparent'; btnLog.style.boxShadow = 'none'; btnLog.style.color = 'var(--secondary)';
-            } else {
-                btnLog.style.background = 'white'; btnLog.style.boxShadow = '0 4px 6px rgba(0,0,0,0.05)'; btnLog.style.color = 'var(--primary)';
-                btnReg.style.background = 'transparent'; btnReg.style.boxShadow = 'none'; btnReg.style.color = 'var(--secondary)';
-            }
-        }
-
-        // --- DYNAMIC SECTIONS ---
-        function toggleSection(id, show) {
-            const el = document.getElementById(id); el.style.display = show ? 'block' : 'none';
-            if(id === 'sec_tanks' && show && document.getElementById('u_tanks').children.length === 0) addTank('u_tanks');
-        }
-
-        function addTank(containerId) {
-            const div = document.createElement('div'); div.className = 'tank-row';
-            div.innerHTML = `
-                <select class="input-field" style="padding:12px;" required>
-                    <option value="" disabled selected>Fuel Type</option>
-                    <option value="MS">MS (Petrol)</option> <option value="HSD">HSD (Diesel)</option>
-                    <option value="XP95">XP95</option> <option value="Speed">Speed</option>
-                </select>
-                <input type="number" class="input-field" style="padding:12px;" placeholder="KL Cap." required>
-                <button type="button" class="btn-mini" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>`;
-            document.getElementById(containerId).appendChild(div);
-        }
-        function getTankData(containerId) {
-            let data = [];
-            document.getElementById(containerId).querySelectorAll('.tank-row').forEach(r => {
-                const f = r.querySelector('select').value, s = r.querySelector('input').value;
-                if(f && s) data.push(`${f} - ${s}KL`);
-            });
-            return data.join(', ');
-        }
-
-        function generateTicket() {
-            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; let res = '';
-            for (let i=0; i<6; i++) res += chars.charAt(Math.floor(Math.random() * chars.length));
-            return `#SEC-${res}`;
-        }
-
-        async function sendDiscord(title, fields, ticket) {
-            if(!DISCORD_WEBHOOK_URL || DISCORD_WEBHOOK_URL.includes('YOUR_WEBHOOK')) return;
-            await fetch(DISCORD_WEBHOOK_URL, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ embeds: [{ title: title, description: `**Secure Auth ID:** \`${ticket}\``, color: title.includes('Update') ? 15105570 : 3447003, fields: fields, footer: { text: "FuelMaster Enterprise Portal" }, timestamp: new Date().toISOString() }]})
-            }).catch(console.error);
-        }
-
-        // --- VERIFICATION ENGINE ---
-        async function runVerificationEngine(callback) {
-            openModal('loadingModal');
-            const steps = ["Establishing secure connection...", "Authenticating credentials...", "Encrypting data payload...", "Verifying station registry...", "Generating 256-bit secure token..."];
-            const textEl = document.getElementById('loadingText');
-            const fill = document.getElementById('progressFill');
             
-            for(let i=0; i<steps.length; i++) {
-                textEl.innerText = steps[i];
-                fill.style.width = `${((i+1) / steps.length) * 100}%`;
-                await new Promise(r => setTimeout(r, Math.random() * 500 + 700)); 
-            }
-            
-            setTimeout(() => { closeModal('loadingModal'); fill.style.width = '0%'; callback(); }, 500);
-        }
+            <form id="regForm" onsubmit="handleRegistration(event)">
+                <div class="input-group">
+                    <label>Station Name</label>
+                    <input type="text" id="r_pump" class="glass-input" placeholder="e.g. Jai Hind Fuels" required>
+                </div>
+                <div class="input-group">
+                    <label>Oil Marketing Company</label>
+                    <select id="r_brand" class="glass-input" required>
+                        <option value="IOCL">IOCL</option>
+                        <option value="BPCL">BPCL</option>
+                        <option value="HPCL">HPCL</option>
+                        <option value="JioBP">JioBP</option>
+                        <option value="Nayara">Nayara</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Authorized Mobile</label>
+                    <input type="tel" id="r_mobile" class="glass-input" pattern="[0-9]{10}" placeholder="10 Digits" required>
+                </div>
+                <div class="input-group">
+                    <label>Storage Configuration</label>
+                    <div id="tankConfigArea" class="tank-area"></div>
+                    <button type="button" class="btn btn-outline btn-sm w-100" onclick="addTankUI('tankConfigArea')">+ Add Storage Tank</button>
+                </div>
+                <button type="submit" class="btn btn-primary btn-glow w-100 mt-20">Initialize Checkout</button>
+            </form>
+        </div>
+    </div>
 
-        // --- HANDLERS ---
-        function handleUpdate(e) {
-            e.preventDefault(); const form = e.target; currentFlow = 'update'; closeModal('updateModal');
-            runVerificationEngine(async () => {
-                const ticket = generateTicket();
-                let fields = [{ name: "Pump Name", value: document.getElementById('u_pump').value, inline: true }, { name: "Auth Mobile", value: document.getElementById('u_mobile_auth').value, inline: true }];
-                if(document.getElementById('chk_addr').checked) fields.push({name: "New Address", value: document.getElementById('u_address').value || "Not Provided"});
-                if(document.getElementById('chk_man').checked) fields.push({name: "New Manager", value: document.getElementById('u_manager').value || "Not Provided"});
-                if(document.getElementById('chk_mob').checked) fields.push({name: "New Mobile", value: document.getElementById('u_mobile_new').value || "Not Provided"});
-                if(document.getElementById('chk_pass').checked) fields.push({name: "Password", value: "Reset Requested"});
-                if(document.getElementById('chk_tanks').checked) fields.push({name: "New Tanks", value: getTankData('u_tanks') || "None Provided"});
+    <!-- Left Side Slide-Over Panel (Update Profile) -->
+    <div class="side-panel-overlay" id="updatePanelOverlay" onclick="closePanel('updatePanel')"></div>
+    <div class="side-panel left-panel" id="updatePanel">
+        <div class="panel-header">
+            <h3><i class="fas fa-shield-alt text-accent"></i> Secure Update (₹199)</h3>
+            <button class="close-panel" onclick="closePanel('updatePanel')"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="panel-body">
+            <div class="alert-box">
+                <i class="fas fa-lock"></i> Requires original registered mobile number to authenticate changes.
+            </div>
+            <form onsubmit="handleUpdate(event)">
+                <div class="input-group">
+                    <label>Station Name</label>
+                    <input type="text" id="u_pump" class="glass-input" required>
+                </div>
+                <div class="input-group">
+                    <label>Registered Mobile</label>
+                    <input type="tel" id="u_mobile" class="glass-input" required>
+                </div>
+                <div class="input-group">
+                    <label>Details to Update</label>
+                    <textarea id="u_changes" class="glass-input" rows="4" placeholder="Describe changes needed (e.g., Add new manager sub-user, adjust tank dips)" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-20">Pay ₹199 & Request Update</button>
+            </form>
+        </div>
+    </div>
 
-                await sendDiscord("🔄 Secure Station Update", fields, ticket);
+    <!-- Cyberpunk Success Modal -->
+    <div class="full-screen-modal" id="successModal">
+        <div class="success-core">
+            <div class="radar-scan"></div>
+            <i class="fas fa-check-double text-success icon-large"></i>
+            <h2 class="mt-20">Transaction Verified</h2>
+            <div class="digital-token-box">
+                <span class="label">SECURE APP TOKEN</span>
+                <div class="token-value" id="ticketDisplay">#FM-000000</div>
+                <div class="payment-ref" id="paymentRefDisplay">REF: <span></span></div>
+            </div>
+            <p class="text-dim mt-20">System architecture provisioned. You may now download the application.</p>
+            <button class="btn btn-primary btn-glow mt-20" onclick="finishFlow()">Download APK Securely</button>
+        </div>
+    </div>
 
-                document.getElementById('successTitle').innerText = "Update Requested!";
-                document.getElementById('successSub').innerText = "Our security team will verify changes within 24 hours.";
-                document.getElementById('ticketDisplay').innerText = ticket; openModal('successModal');
-                form.reset(); document.querySelectorAll('.hidden-section').forEach(el => el.style.display = 'none');
-            });
-        }
-
-        function handleRegister(e) {
-            e.preventDefault(); const form = e.target; currentFlow = 'register'; closeModal('downloadModal');
-            runVerificationEngine(async () => {
-                const ticket = generateTicket();
-                const fields = [{ name: "Pump Name", value: document.getElementById('r_pump').value, inline: true }, { name: "Brand", value: document.getElementById('r_brand').value, inline: true }, { name: "Address", value: document.getElementById('r_address').value }, { name: "Manager", value: document.getElementById('r_manager').value, inline: true }, { name: "Mobile", value: document.getElementById('r_mobile').value, inline: true }, { name: "Tanks", value: getTankData('r_tanks') || "None" }];
-
-                await sendDiscord("🆕 Enterprise Registration", fields, ticket);
-
-                document.getElementById('successTitle').innerText = "Registration Complete!";
-                document.getElementById('successSub').innerText = "Your account is secure. Click 'Done' to download the application.";
-                document.getElementById('ticketDisplay').innerText = ticket; openModal('successModal'); form.reset();
-            });
-        }
-
-        function handleLogin(e) {
-            e.preventDefault(); currentFlow = 'login'; closeModal('downloadModal');
-            runVerificationEngine(() => {
-                document.getElementById('successTitle').innerText = "Auth Successful!";
-                document.getElementById('successSub').innerText = "Connection secured. Click 'Done' to begin app download.";
-                document.getElementById('ticketDisplay').style.display = 'none'; openModal('successModal');
-            });
-        }
-
-        function finishFlow() {
-            closeModal('successModal');
-            if(currentFlow === 'register' || currentFlow === 'login') { window.location.href = APK_LINK; }
-            setTimeout(() => document.getElementById('ticketDisplay').style.display = 'block', 500); 
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

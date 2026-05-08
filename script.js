@@ -217,7 +217,7 @@ function handleUpdate(e) {
     e.preventDefault();
     closePanel('updatePanel');
     
-    initiateRazorpay(50, "Secure Station Update Request", async (paymentId) => {
+    initiateRazorpay(49, "Secure Station Update Request", async (paymentId) => {
         const token = "#UPD-" + Math.random().toString(36).substr(2, 6).toUpperCase();
 
         await sendDiscordWebhook("🔄 Station Update Requested", 15105570, [

@@ -191,7 +191,7 @@ function handleRegistration(e) {
     e.preventDefault();
     closePanel('checkoutPanel');
     
-    initiateRazorpay(999, "Enterprise App License", async (paymentId) => {
+    initiateRazorpay(99, "Enterprise App License", async (paymentId) => {
         const token = "#FM-" + Math.random().toString(36).substr(2, 6).toUpperCase();
         
         let tanks = [];
@@ -217,7 +217,7 @@ function handleUpdate(e) {
     e.preventDefault();
     closePanel('updatePanel');
     
-    initiateRazorpay(199, "Secure Station Update Request", async (paymentId) => {
+    initiateRazorpay(50, "Secure Station Update Request", async (paymentId) => {
         const token = "#UPD-" + Math.random().toString(36).substr(2, 6).toUpperCase();
 
         await sendDiscordWebhook("🔄 Station Update Requested", 15105570, [

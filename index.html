@@ -3,285 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FuelMaster Ultra | Spatial Enterprise OS</title>
-    
-    <!-- Ultra-Premium Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+    <title>FuelMaster | The Ultimate Forecourt OS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
-
-    <!-- Core Libraries -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
-    <!-- Cinematic Preloader -->
-    <div class="preloader">
-        <div class="loader-content">
-            <div class="brand-text">FUELMASTER</div>
-            <div class="loading-bar"><div class="loading-progress"></div></div>
-            <div class="loading-percentage">0%</div>
-        </div>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
     </div>
 
-    <!-- Custom Magnetic Cursor -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
-    <!-- Ambient Background Effects -->
-    <div class="noise-bg"></div>
-    <div class="ambient-light orb-1"></div>
-    <div class="ambient-light orb-2"></div>
-    <div class="ambient-light orb-3"></div>
-
-    <!-- Glass Navbar -->
-    <nav class="ultra-nav">
-        <div class="nav-container">
-            <div class="logo">
-                <div class="logo-icon"><i class="fas fa-gas-pump"></i></div>
-                <span class="logo-text">FUELMASTER<span class="pro-badge">ULTRA</span></span>
-            </div>
-            <div class="nav-links pc-only">
-                <a href="#features" class="hover-link">Features</a>
-                <a href="#dashboard" class="hover-link">Updates</a>
-            </div>
-            <button class="btn btn-secondary btn-magnetic" onclick="openPanel('checkoutPanel')">
-                <span class="btn-text">Initialize App <i class="fas fa-arrow-right"></i></span>
-            </button>
+    <header class="navbar">
+        <div class="logo">
+            <div class="logo-icon"><i class="fas fa-gas-pump"></i></div>
+            <div class="logo-text">FUELMASTER</div>
         </div>
-    </nav>
+    </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <div class="status-pill reveal-up">
-                    <span class="pulse-dot"></span> App Version: v3.0 Stable
-                </div>
-                <h1 class="hero-title reveal-up">
-                    End Manual Math. <br>
-                    <span class="gradient-text liquid-effect">Total Pump Control.</span>
-                </h1>
-                <p class="hero-desc reveal-up">
-                    Calculate standard density, audit tanker variance, and map dip volumes instantly without opening a single manual calibration chart.
-                </p>
-                <div class="hero-actions reveal-up">
-                    <button class="btn btn-primary btn-glow btn-magnetic" onclick="openPanel('checkoutPanel')">
-                        <span class="btn-text">Download App — ₹99</span>
-                    </button>
-                    <button class="btn btn-outline btn-magnetic" onclick="openPanel('updatePanel')">
-                        <span class="btn-text">Secure Update Request</span>
-                    </button>
-                </div>
+    <main class="container">
+        <section class="hero slide-up">
+            <div class="version-badge glass-panel">
+                <span class="pulse-dot"></span> v3.0 Universal Edition
             </div>
-
-            <!-- 3D Hero Visual -->
-            <div class="hero-3d-wrapper reveal-scale">
-                <div class="dashboard-mockup tilt-card">
-                    <div class="mockup-header">
-                        <div class="mac-dots"><span></span><span></span><span></span></div>
-                        <div class="mockup-url">fuelmaster.app/tanker-audit</div>
-                    </div>
-                    <div class="mockup-body">
-                        <div class="mockup-sidebar"></div>
-                        <div class="mockup-main">
-                            <div class="mockup-chart" style="display:flex; flex-direction:column; justify-content:center; padding: 20px;">
-                                <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-family:monospace;"><span>Hydrometer:</span> <strong>742.5</strong></div>
-                                <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-family:monospace;"><span>Temperature:</span> <strong>31.5°C</strong></div>
-                                <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-family:monospace;"><span>Challan Dens:</span> <strong>746.0</strong></div>
-                                <div style="border-top:1px dashed rgba(255,255,255,0.2); margin-bottom:20px;"></div>
-                                <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); padding:15px; border-radius:10px; text-align:center; color:#10b981; font-weight:bold; letter-spacing:2px;">ACCEPTABLE <i class="fas fa-check-circle"></i></div>
-                            </div>
-                            <div class="mockup-stats">
-                                <div class="m-stat line-load"></div>
-                                <div class="m-stat line-load delay-1"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <h1 class="hero-title">Total Control for <br><span class="text-gradient animated-gradient">Every Dealership.</span></h1>
+            <p class="hero-desc">The ultimate mobile OS for petrol pump managers. Standard density, tanker audits, and compliance—automated with military precision.</p>
+            
+            <div class="hero-actions">
+                <button class="btn btn-primary btn-glow w-100 pulse-anim" onclick="openSheet('downloadSheet')">
+                    Download Lifetime App — ₹99
+                </button>
+                <button class="btn btn-glass w-100 mt-15" onclick="openSheet('updateSheet')">
+                    <i class="fas fa-sync-alt"></i> Request Station Update — ₹49
+                </button>
             </div>
         </section>
 
-        <!-- Marquee Partners -->
-        <div class="marquee-section">
-            <p class="marquee-title">ENGINEERED FOR DEALERS ACROSS INDIA</p>
-            <div class="marquee">
-                <div class="marquee-content">
-                    <span><i class="fas fa-droplet"></i> INDIAN OIL</span>
-                    <span><i class="fas fa-fire-flame-simple"></i> BHARAT PETROLEUM</span>
-                    <span><i class="fas fa-gas-pump"></i> HINDUSTAN PETROLEUM</span>
-                    <span><i class="fas fa-bolt"></i> JIO BP</span>
-                    <span><i class="fas fa-shield-halved"></i> NAYARA ENERGY</span>
-                    <!-- Duplicate for infinite scroll -->
-                    <span><i class="fas fa-droplet"></i> INDIAN OIL</span>
-                    <span><i class="fas fa-fire-flame-simple"></i> BHARAT PETROLEUM</span>
-                    <span><i class="fas fa-gas-pump"></i> HINDUSTAN PETROLEUM</span>
-                    <span><i class="fas fa-bolt"></i> JIO BP</span>
-                    <span><i class="fas fa-shield-halved"></i> NAYARA ENERGY</span>
-                </div>
+        <section class="features-section">
+            <div class="section-title fade-in-scroll">
+                <h2>Everything You Need</h2>
+                <p>Engineered for maximum forecourt efficiency and zero revenue leakage.</p>
             </div>
-        </div>
 
-        <!-- Bento Grid Features -->
-        <section class="bento-section" id="features">
-            <div class="bento-header reveal-up">
-                <h2>Designed for the Forecourt.</h2>
-                <p>Everything your managers need, engineered into one seamless application.</p>
-            </div>
-            
             <div class="bento-grid">
-                
-                <!-- Feature 1: Auto Density -->
-                <div class="bento-item span-2 tilt-card">
-                    <div class="bento-inner">
-                        <div class="icon-ring"><i class="fas fa-temperature-half"></i></div>
-                        <h3>Instant Density Engine</h3>
-                        <p>Throw away the ASTM 53B manual books. Input your hydrometer reading and temperature, and the engine instantly outputs the exact standard density at 15°C.</p>
-                        
-                        <div class="mini-calc" style="max-width: 350px; margin-top: 20px;">
-                            <div>Obs: 742.5 @ 31°C</div> <i class="fas fa-arrow-right text-dim"></i> <div class="highlight">Std: 746.2 @ 15°C</div>
-                        </div>
-                    </div>
+                <div class="bento-card glass-panel fade-in-scroll delay-1">
+                    <div class="icon-wrap blue"><i class="fas fa-temperature-half"></i></div>
+                    <h3>1. Automated Density Engine</h3>
+                    <p>Instantly calculate ASTM 53B standard density at 15°C with zero margin for error. Simply input your observed hydrometer reading and current temperature. FuelMaster's core engine bypasses the need for manual, physical calibration books, ensuring your daily morning density checks are 100% OMC-compliant and recorded in under 5 seconds.</p>
                 </div>
-
-                <!-- Feature 2: Dip Volume -->
-                <div class="bento-item tilt-card">
-                    <div class="bento-inner">
-                        <div class="tank-visual">
-                            <div class="liquid" id="liveLiquid"></div>
-                            <div class="tank-data">
-                                <h4 id="klCounter">14.5 KL</h4>
-                            </div>
-                        </div>
-                        <h3>Dip to Volume</h3>
-                        <p>Enter the dip reading in cm, instantly get exact liters.</p>
-                    </div>
+                <div class="bento-card glass-panel fade-in-scroll delay-2">
+                    <div class="icon-wrap cyan"><i class="fas fa-ruler-vertical"></i></div>
+                    <h3>2. Dip to Volume Converter</h3>
+                    <p>Stop estimating your inventory. Convert physical underground tank dips (in centimeters or millimeters) directly into highly accurate liter volumes. Our proprietary algorithm maps your exact tank calibration charts, instantly calculating current stock levels for MS, HSD, and XP95 without flipping through hundreds of paper pages.</p>
                 </div>
-
-                <!-- Feature 3: Tanker Variance -->
-                <div class="bento-item tilt-card">
-                    <div class="bento-inner">
-                        <div class="icon-ring" style="background: rgba(16, 185, 129, 0.1); color: var(--success); border-color: rgba(16, 185, 129, 0.3);"><i class="fas fa-scale-balanced"></i></div>
-                        <h3>Tanker Variance</h3>
-                        <p>Input observed data vs invoice density. App flags ACCEPTABLE or REJECT instantly.</p>
-                    </div>
+                <div class="bento-card glass-panel fade-in-scroll delay-3">
+                    <div class="icon-wrap red"><i class="fas fa-truck-droplet"></i></div>
+                    <h3>3. Tanker Variance Audit</h3>
+                    <p>Protect your dealership from transit losses. Audit incoming Tank Trucks (TT) by entering your decantation density against the supply location's invoice (Challan) density. The system calculates temperature-adjusted volumetric variations, automatically flagging the load as ACCEPTABLE or warning you to REJECT it if it crosses statutory limits.</p>
                 </div>
-
-                <!-- Feature 4: Sub-users & Themes -->
-                <div class="bento-item tilt-card">
-                    <div class="bento-inner">
-                        <div class="icon-ring purple"><i class="fas fa-users-gear"></i></div>
-                        <h3>Staff & Themes</h3>
-                        <p>Multiple sub-user profiles for managers. High-contrast themes for Day & Night shifts.</p>
-                    </div>
+                <div class="bento-card glass-panel fade-in-scroll delay-1">
+                    <div class="icon-wrap green"><i class="fas fa-clipboard-check"></i></div>
+                    <h3>4. Manager Action Workflows</h3>
+                    <p>Enforce strict operational accountability across all shifts. Your forecourt managers receive automated daily checklists requiring them to log physical dips, complete shift-change totalizer readings, verify safety equipment, and declare banking deposits, ensuring critical standard operating procedures (SOPs) are never skipped.</p>
                 </div>
-
-                <!-- Feature 5: Compliance Tracker -->
-                <div class="bento-item span-2 tilt-card">
-                    <div class="bento-inner layout-row">
-                        <div class="text-part">
-                            <span style="display:inline-block; font-size:0.7rem; font-family:monospace; background:rgba(239,68,68,0.1); color:#ef4444; padding:4px 8px; border-radius:4px; margin-bottom:10px; border:1px solid rgba(239,68,68,0.3);">IN DEVELOPMENT</span>
-                            <h3>Compliance Tracker</h3>
-                            <p>An upcoming module to track statutory requirements, stamping dates, and automated reporting. Stay ahead of inspections.</p>
-                        </div>
-                        <div class="receipt-anim">
-                            <div class="receipt-paper">
-                                <div class="line"></div><div class="line w-70"></div><div class="line w-50"></div>
-                                <div class="stamp">VERIFIED</div>
-                            </div>
-                        </div>
+                <div class="bento-card glass-panel fade-in-scroll delay-2">
+                    <div class="icon-wrap orange"><i class="fas fa-file-invoice"></i></div>
+                    <h3>5. W&M Stamping Invoice Maker</h3>
+                    <p>Navigate annual inspections effortlessly. Generate 100% compliant Weights & Measures (W&M) stamping invoices on the fly. Enter standard nozzle details, and the app instantly auto-populates dealership headers, generating an inspector-ready, highly accurate PDF document ready for print or official digital submission.</p>
+                </div>
+                <div class="bento-card glass-panel fade-in-scroll delay-3">
+                    <div class="icon-wrap purple"><i class="fas fa-users-gear"></i></div>
+                    <h3>6. Secure Sub-User Profiles</h3>
+                    <p>Maintain ultimate administrative authority. As the owner, create individual, restricted-access accounts for your managers and staff. Track exactly who logged which density reading, while ensuring your core station configurations, tank charts, and sensitive financial logs remain completely secure behind your master lock.</p>
+                </div>
+                <div class="bento-card glass-panel fade-in-scroll delay-1">
+                    <div class="icon-wrap indigo"><i class="fas fa-cloud-arrow-up"></i></div>
+                    <h3>7. Real-Time Cloud Sync</h3>
+                    <p>Experience seamless, interconnected operations. Every dip calculation, density check, and to-do list completion instantly syncs via our secure backend to all registered devices at your station. Monitor your forecourt's live status remotely, with automatic data backups ensuring you never lose historical logs.</p>
+                </div>
+                <div class="bento-card glass-panel fade-in-scroll bento-span-2 delay-2">
+                    <div class="icon-wrap pink"><i class="fas fa-palette"></i></div>
+                    <h3>8. OMC Custom Branding Engine</h3>
+                    <p>Personalize your digital workspace. The FuelMaster OS allows you to instantly switch the entire application interface to match your specific Oil Marketing Company's official brand guidelines. Features fully optimized, high-contrast Day and Night shift modes for perfect visibility on the forecourt, regardless of the time or weather.</p>
+                    <div class="brand-tags mt-15">
+                        <span class="tag glass-tag">Indian Oil (IOCL)</span>
+                        <span class="tag glass-tag">Bharat Petroleum (BPCL)</span>
+                        <span class="tag glass-tag">Hindustan Petroleum (HPCL)</span>
+                        <span class="tag glass-tag">Jio-BP Mobility</span>
+                        <span class="tag glass-tag">Nayara Energy</span>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Right Side Slide-Over Panel (Registration/Checkout) -->
-    <div class="side-panel-overlay" id="checkoutPanelOverlay" onclick="closePanel('checkoutPanel')"></div>
-    <div class="side-panel" id="checkoutPanel">
-        <div class="panel-header">
-            <h3><i class="fas fa-download text-accent"></i> Download App</h3>
-            <button class="close-panel" onclick="closePanel('checkoutPanel')"><i class="fas fa-times"></i></button>
+    <div class="sheet-overlay" id="sheetOverlay" onclick="closeAllSheets()"></div>
+
+    <div class="bottom-sheet glass-modal" id="downloadSheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-header">
+            <h2>Initialize FuelMaster</h2>
+            <div class="price-tag glass-tag">₹99 Lifetime</div>
         </div>
-        <div class="panel-body">
-            <div class="price-tag">
-                <span class="currency">₹</span><span class="amount">99</span><span class="duration">/lifetime</span>
-            </div>
-            
-            <form id="regForm" onsubmit="handleRegistration(event)">
-                <div class="input-group">
+        <div class="sheet-body">
+            <form onsubmit="handleRegistration(event)">
+                <div class="form-group">
                     <label>Station Name</label>
-                    <input type="text" id="r_pump" class="glass-input" placeholder="e.g. Jai Hind Fuels" required>
+                    <input type="text" id="r_pump" class="form-input" placeholder="e.g. Jai Hind Fuels" required>
                 </div>
-                <div class="input-group">
-                    <label>Oil Marketing Company</label>
-                    <select id="r_brand" class="glass-input" required>
-                        <option value="IOCL">IOCL</option>
-                        <option value="BPCL">BPCL</option>
-                        <option value="HPCL">HPCL</option>
-                        <option value="JioBP">JioBP</option>
-                        <option value="Nayara">Nayara</option>
+                <div class="form-group">
+                    <label>Marketing Company</label>
+                    <select id="r_brand" class="form-input" required>
+                        <option value="IOCL">Indian Oil (IOCL)</option>
+                        <option value="BPCL">Bharat Petroleum (BPCL)</option>
+                        <option value="HPCL">Hindustan Petroleum (HPCL)</option>
+                        <option value="JioBP">Jio BP</option>
+                        <option value="Nayara">Nayara Energy</option>
                     </select>
                 </div>
-                <div class="input-group">
+                <div class="form-group">
                     <label>Authorized Mobile</label>
-                    <input type="tel" id="r_mobile" class="glass-input" pattern="[0-9]{10}" placeholder="10 Digits" required>
+                    <input type="tel" id="r_mobile" class="form-input" pattern="[0-9]{10}" placeholder="10 Digits" required>
                 </div>
-                <div class="input-group">
-                    <label>Storage Configuration</label>
-                    <div id="tankConfigArea" class="tank-area"></div>
-                    <button type="button" class="btn btn-outline btn-sm w-100" onclick="addTankUI('tankConfigArea')">+ Add Storage Tank</button>
-                </div>
-                <button type="submit" class="btn btn-primary btn-glow w-100 mt-20">Initialize Checkout</button>
+                <button type="submit" class="btn btn-primary btn-glow w-100 mt-15">Proceed to Pay ₹99</button>
             </form>
         </div>
     </div>
 
-    <!-- Left Side Slide-Over Panel (Update Profile) -->
-    <div class="side-panel-overlay" id="updatePanelOverlay" onclick="closePanel('updatePanel')"></div>
-    <div class="side-panel left-panel" id="updatePanel">
-        <div class="panel-header">
-            <h3><i class="fas fa-shield-alt text-accent"></i> Secure Update (₹49)</h3>
-            <button class="close-panel" onclick="closePanel('updatePanel')"><i class="fas fa-times"></i></button>
+    <div class="bottom-sheet glass-modal" id="updateSheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-header">
+            <h2>Station Update Request</h2>
+            <div class="price-tag glass-tag">₹49 Fee</div>
         </div>
-        <div class="panel-body">
-            <div class="alert-box">
-                <i class="fas fa-lock"></i> Requires original registered mobile number to authenticate changes.
+        <div class="sheet-body">
+            <div class="alert-box glass-panel mb-15">
+                <i class="fas fa-lock"></i> Requires your originally registered mobile number.
             </div>
             <form onsubmit="handleUpdate(event)">
-                <div class="input-group">
-                    <label>Station Name</label>
-                    <input type="text" id="u_pump" class="glass-input" required>
+                <div class="form-group">
+                    <label>Dealership Name</label>
+                    <input type="text" id="u_pump" class="form-input" placeholder="Station name" required>
                 </div>
-                <div class="input-group">
+                <div class="form-group">
                     <label>Registered Mobile</label>
-                    <input type="tel" id="u_mobile" class="glass-input" required>
+                    <input type="tel" id="u_mobile" class="form-input" pattern="[0-9]{10}" placeholder="10 Digits" required>
                 </div>
-                <div class="input-group">
-                    <label>Details to Update</label>
-                    <textarea id="u_changes" class="glass-input" rows="4" placeholder="Describe changes needed (e.g., Add new manager sub-user, adjust tank dips)" required></textarea>
+                <div class="form-group">
+                    <label>Update Details</label>
+                    <textarea id="u_changes" class="form-input" rows="3" placeholder="Describe changes needed (e.g., adding a new manager sub-user, modifying tank charts)..." required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary w-100 mt-20">Pay ₹49 & Request Update</button>
+                <button type="submit" class="btn btn-glass w-100 mt-15">Pay ₹49 & Request</button>
             </form>
         </div>
     </div>
 
-    <!-- Cyberpunk Success Modal -->
-    <div class="full-screen-modal" id="successModal">
-        <div class="success-core">
-            <div class="radar-scan"></div>
-            <i class="fas fa-check-double text-success icon-large"></i>
-            <h2 class="mt-20">Transaction Verified</h2>
-            <div class="digital-token-box">
-                <span class="label">SECURE APP TOKEN</span>
-                <div class="token-value" id="ticketDisplay">#FM-000000</div>
-                <div class="payment-ref" id="paymentRefDisplay">REF: <span></span></div>
+    <div class="bottom-sheet glass-modal" id="successSheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-body text-center">
+            <div class="success-ring bounce-in">
+                <i class="fas fa-check"></i>
             </div>
-            <p class="text-dim mt-20">System architecture provisioned. You may now download the application.</p>
-            <button class="btn btn-primary btn-glow mt-20" onclick="finishFlow()">Download APK Securely</button>
+            <h2 id="successTitle" class="mt-15 text-white">Verified</h2>
+            <p id="successMessage" class="text-muted mt-5 mb-20">Transaction successfully processed.</p>
+            
+            <div class="receipt-box glass-panel mb-20">
+                <span class="receipt-label">SECURE TOKEN</span>
+                <div id="ticketDisplay" class="token-text text-gradient">#FM-000000</div>
+                <div class="receipt-ref">REF: <span id="paymentRefDisplay">PAY_123</span></div>
+            </div>
+
+            <button id="successActionBtn" class="btn btn-primary btn-glow w-100">Action</button>
         </div>
     </div>
 

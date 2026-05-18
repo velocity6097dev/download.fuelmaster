@@ -1,7 +1,7 @@
 // --- FUELMASTER CONFIGURATION ---
 const RAZORPAY_TEST_KEY = "rzp_test_SmwqZWycWTCEU9"; 
 const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1472252413195849922/oyxGWQ2D1t0Bj-H8ZR8c4pFr99fxQlPerNEtj694ohjIi6H8hKIo8u4UX21CZQt-Sykg";
-const APK_LINK = "https://github.com/VELOCITY6097/Fuel-Master-app/releases/download/V1.5/FuelMaster.apk";
+const APK_LINK = "https://download1325.mediafire.com/3vm5tyb69yngm-hjQm8O1_9FF6RsqdbZLSxDnA1L5HyDQNiUqRr2HYPGYUXEITVhcXf59duXhxdAblNaVEEPlBn59MK_r4aTTSpolTY6AW8x0mCFoJMulUTUVvW7zfg-6UOG2z6SQhama0bVxP_ty4vFb9sqBRMsN5WQEuFW8j4xwQ/ok3kas5ir0fdz1a/FuelMaster.apk";
 
 // --- BULLETPROOF SCROLL ANIMATIONS ---
 document.addEventListener('DOMContentLoaded', () => {
